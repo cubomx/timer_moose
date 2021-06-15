@@ -1,35 +1,22 @@
 import 'package:flutter/material.dart';
-// widgest
+// widgets
 import 'my_app_bar.dart';
-import 'buttons_exercise_list.dart';
-import 'glow_circle.dart';
-// helpers
+import 'selection.dart';
+import 'routes/tabata.dart';
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   @override
-  _AppState createState() => _AppState();
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: MyAppBar(key: Key("esta")), body: Selection());
+  }
 }
 
-class _AppState extends State<App> {
+class TabataRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: MyAppBar(key: Key("esta")),
-        body: Stack(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [GlowCircle()],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Center(
-                  child: ButtonsExerciseList(),
-                )
-              ],
-            ),
-          ],
-        ));
+      appBar: MyAppBar(key: Key("esta")),
+      body: Tabata(),
+    );
   }
 }

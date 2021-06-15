@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
-// helpers
-//import 'helpers/convert.dart';
+// style
 import 'package:flutter_glow/flutter_glow.dart';
 
-class ButtonExercise extends StatefulWidget {
-  final String title;
-  final MaterialColor color;
-  final Function onPress;
-  const ButtonExercise(this.title, this.color, this.onPress);
+var goBack = (context) => {Navigator.pop(context)};
+
+class ButtonBack extends StatefulWidget {
   @override
-  _ButtonExerciseState createState() => _ButtonExerciseState();
+  _ButtonBackState createState() => _ButtonBackState();
 }
 
-class _ButtonExerciseState extends State<ButtonExercise> {
+class _ButtonBackState extends State<ButtonBack> {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints.tightFor(width: 200, height: 50),
       child: ElevatedButton(
         onPressed: () {
-          widget.onPress(context);
+          goBack(context);
         },
         child: GlowText(
-          widget.title,
+          "BACK",
           style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
         ),
         style: ElevatedButton.styleFrom(
-          primary: widget.color,
+          primary: Colors.blue,
           onSurface: Colors.grey,
         ),
       ),

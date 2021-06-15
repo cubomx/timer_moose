@@ -30,7 +30,7 @@ class _GlowCircleState extends State<GlowCircle>
       width: (MediaQuery.of(context).size.width) - 40,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Color.fromARGB(255, 33, 33, 33),
+          color: Color.fromARGB(255, 0, 0, 0),
           boxShadow: [
             BoxShadow(
                 color: Color.fromARGB(130, 255, 255, 255),
