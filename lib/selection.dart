@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // widgets
 import 'buttons_exercise_list.dart';
-import 'glow_circle.dart';
+import 'effects/glow_circle.dart';
 
 class Selection extends StatefulWidget {
   @override

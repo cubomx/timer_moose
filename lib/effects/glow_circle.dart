@@ -35,7 +35,11 @@ class _GlowCircleState extends State<GlowCircle>
             BoxShadow(
                 color: Color.fromARGB(130, 255, 255, 255),
                 blurRadius: _animation.value,
-                spreadRadius: _animation.value)
+                spreadRadius: _animation.value),
+            BoxShadow(
+                color: Color.fromARGB(130, 255, 255, 255),
+                blurRadius: _animation.value,
+                spreadRadius: -_animation.value),
           ]),
     );
   }
