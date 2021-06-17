@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
-  /// you can add more fields that meet your needs
-
-  MyAppBar({required Key key})
+  final String screenTitle;
+  final Function leftAction;
+  final List leftArgs;
+  final IconData leftIcon;
+  MyAppBar(
+      {required Key key,
+      required this.screenTitle,
+      required this.leftAction,
+      required this.leftArgs,
+      required this.leftIcon})
       : preferredSize = Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -20,14 +27,13 @@ class _MyAppBarState extends State<MyAppBar> {
     return AppBar(
       centerTitle: true,
       leading: IconButton(
-        icon: Icon(Icons.menu),
+        icon: Icon(widget.leftIcon),
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('This is a snackbar')));
+          Function.apply(widget.leftAction, widget.leftArgs);
         },
       ),
       title: Text(
-        "TIMER MOOSE",
+        widget.screenTitle,
         style: TextStyle(fontFamily: 'Lastica', fontWeight: FontWeight.bold),
       ),
       actions: [

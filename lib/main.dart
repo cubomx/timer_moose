@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // widgets
-import 'app.dart';
+import 'package:timer_moose/app.dart';
 // helpers
-import 'helpers/convert.dart';
+import 'package:timer_moose/helpers/convert.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 
-class FlickerCircle extends StatefulWidget {
+class SquareNeon extends StatefulWidget {
   final Color color;
   final int shadowSpread;
   final double strokeWidth;
   final int spreadValue;
   final Widget child;
-  const FlickerCircle(
+  final double width, height;
+  const SquareNeon(
       {required Key key,
       required this.color,
       required this.shadowSpread,
       required this.strokeWidth,
       required this.spreadValue,
-      required this.child})
+      required this.child,
+      required this.width,
+      required this.height})
       : super(key: key);
   @override
-  _FlickerCircleState createState() => _FlickerCircleState();
+  _SquareNeonState createState() => _SquareNeonState();
 }
 
-class _FlickerCircleState extends State<FlickerCircle> {
+class _SquareNeonState extends State<SquareNeon> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,11 +43,12 @@ class _FlickerCircleState extends State<FlickerCircle> {
                 Center(
                   child: CustomPaint(
                     painter: ShapePainter(
-                      color: widget.color,
-                      shadowSpread: widget.shadowSpread,
-                      strokeWidth: widget.strokeWidth,
-                      spreadValue: widget.spreadValue,
-                    ),
+                        color: widget.color,
+                        shadowSpread: widget.shadowSpread,
+                        strokeWidth: widget.strokeWidth,
+                        spreadValue: widget.spreadValue,
+                        width: widget.width,
+                        height: widget.height),
                   ),
                 )
               ],
@@ -59,11 +63,14 @@ class ShapePainter extends CustomPainter {
   final int shadowSpread;
   final double strokeWidth;
   final int spreadValue;
+  final double height, width;
   ShapePainter(
       {required this.strokeWidth,
       required this.color,
       required this.shadowSpread,
-      required this.spreadValue});
+      required this.spreadValue,
+      required this.width,
+      required this.height});
   @override
   void paint(Canvas canvas, Size size) {
     List shadows = [];
@@ -84,13 +91,11 @@ class ShapePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    Rect rect1 =
-        new Rect.fromCenter(center: Offset.zero, width: 100, height: 100);
-    shadows.forEach((element) {
-      canvas.drawRect(rect1, element);
-    });
     Rect rect =
-        new Rect.fromCenter(center: Offset.zero, width: 100, height: 100);
+        new Rect.fromCenter(center: Offset.zero, width: width, height: height);
+    shadows.forEach((element) {
+      canvas.drawRect(rect, element);
+    });
     canvas.drawRect(rect, stroke);
   }
 

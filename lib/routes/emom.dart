@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Amrap extends StatefulWidget {
+class Emom extends StatefulWidget {
   @override
-  _AmrapState createState() => _AmrapState();
+  _EmomState createState() => _EmomState();
 }
 
-class _AmrapState extends State<Amrap> {
+class _EmomState extends State<Emom> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +17,7 @@ class _AmrapState extends State<Amrap> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Here goes amrap",
+                  "Here goes emom",
                   style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,

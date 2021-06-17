@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 // widgets
-import 'my_app_bar.dart';
-import 'selection.dart';
-import 'routes/tabata.dart';
+import 'package:timer_moose/my_app_bar.dart';
+import 'package:timer_moose/selection.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: MyAppBar(key: Key("esta")), body: Selection());
-  }
-}
-
-class TabataRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(key: Key("esta")),
-      body: Tabata(),
-    );
+        appBar: MyAppBar(
+          key: Key("esta"),
+          screenTitle: "TIMER MOOSE",
+          leftAction: () {},
+          leftArgs: [],
+          leftIcon: Icons.menu,
+        ),
+        body: Selection());
   }
 }
