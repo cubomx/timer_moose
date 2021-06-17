@@ -5,8 +5,8 @@ import 'package:timer_moose/routes/amrap.dart';
 import 'package:timer_moose/routes/for_time.dart';
 import 'package:timer_moose/routes/tabata.dart';
 import 'package:timer_moose/routes/emom.dart';
-
-Function goBack = (context) => {Navigator.pop(context)};
+// helpers
+import 'package:timer_moose/helpers/navigation.dart';
 
 class TabataRoute extends StatelessWidget {
   @override

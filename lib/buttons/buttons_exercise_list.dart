@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:timer_moose/routes/main.dart';
 // widgets
-import 'package:timer_moose/button_exercise.dart';
+import 'package:timer_moose/buttons/button_exercise.dart';
 // helpers
 import 'package:timer_moose/helpers/convert.dart';
-
-Function switchScreen = (context, route) =>
-    {Navigator.push(context, MaterialPageRoute(builder: (context) => route))};
+import 'package:timer_moose/helpers/navigation.dart';
 
 class ButtonsExerciseList extends StatelessWidget {
   @override
