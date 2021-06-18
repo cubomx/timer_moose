@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:timer_moose/buttons/my_button.dart';
-import 'package:timer_moose/my_app_bar.dart';
 import 'package:timer_moose/square_input.dart';
+// routes
+import 'package:timer_moose/routes/timers/main.dart';
 // helpers
 import 'package:timer_moose/helpers/convert.dart';
 import 'package:timer_moose/helpers/navigation.dart';
@@ -89,28 +90,6 @@ class _TabataState extends State<Tabata> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: items,
-    );
-  }
-}
-
-class TabataTimerRoute extends StatelessWidget {
-  final int rounds, rest, work;
-  const TabataTimerRoute(
-      {required this.rounds, required this.rest, required this.work});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(
-        key: Key("Tabata Timer Route"),
-        screenTitle: "TABATA",
-        leftAction: goBack,
-        leftArgs: [context],
-        leftIcon: Icons.arrow_back_ios_new_rounded,
-      ),
-      body: Text(
-        rounds.toString(),
-        style: TextStyle(color: Colors.white, fontSize: 20),
-      ),
     );
   }
 }
