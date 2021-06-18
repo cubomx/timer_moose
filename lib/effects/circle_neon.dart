@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 // ignore: must_be_immutable
 class CircleNeon extends StatefulWidget {
@@ -10,7 +9,7 @@ class CircleNeon extends StatefulWidget {
   final double strokeWidth;
   final int spreadValue;
   final Widget child;
-  int time;
+  final double quantity;
   CircleNeon(
       {required Key key,
       required this.color,
@@ -19,7 +18,7 @@ class CircleNeon extends StatefulWidget {
       required this.strokeWidth,
       required this.spreadValue,
       required this.child,
-      required this.time})
+      required this.quantity})
       : super(key: key);
 
   @override
@@ -27,37 +26,6 @@ class CircleNeon extends StatefulWidget {
 }
 
 class _CircleNeonState extends State<CircleNeon> {
-  late Timer _timer;
-  int time = 0;
-
-  void startTimer() {
-    const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(oneSec, (timer) {
-      if (time == 0) {
-        setState(() {
-          timer.cancel();
-        });
-      } else {
-        setState(() {
-          time--;
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    time = widget.time;
-    startTimer();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -69,7 +37,7 @@ class _CircleNeonState extends State<CircleNeon> {
             shadowSpread: widget.shadowSpread,
             strokeWidth: widget.strokeWidth,
             spreadValue: widget.spreadValue,
-            quantity: (pi * 2) * ((widget.time - time) / widget.time),
+            quantity: widget.quantity,
           ),
           child: widget.child == null ? Container() : widget.child,
         ),

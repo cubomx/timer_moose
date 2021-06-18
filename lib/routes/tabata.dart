@@ -6,6 +6,7 @@ import 'package:timer_moose/routes/timers/main.dart';
 // helpers
 import 'package:timer_moose/helpers/convert.dart';
 import 'package:timer_moose/helpers/navigation.dart';
+import 'package:timer_moose/helpers/my_time.dart';
 
 class Tabata extends StatefulWidget {
   @override
@@ -57,8 +58,8 @@ List<Widget> getStarting(Function buttonAction) {
 
 class _TabataState extends State<Tabata> {
   int rounds = 0;
-  int rest = 0;
-  int work = 0;
+  late MyTime rest;
+  late MyTime work;
 
   var items = <Widget>[];
 
@@ -68,10 +69,10 @@ class _TabataState extends State<Tabata> {
         rounds = (items[0] as SquareInput).value;
       }
       if (items[1] is SquareInput) {
-        work = (items[1] as SquareInput).value;
+        work = secondsToMinutes((items[1] as SquareInput).value);
       }
       if (items[2] is SquareInput) {
-        rest = (items[2] as SquareInput).value;
+        rest = secondsToMinutes((items[2] as SquareInput).value);
       }
       switchScreen(
           context, TabataTimerRoute(rounds: rounds, rest: rest, work: work));
