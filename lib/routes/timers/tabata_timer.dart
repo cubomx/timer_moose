@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter_glow/flutter_glow.dart';
 // widgets
 import 'package:timer_moose/effects/circle_neon.dart';
+import 'package:timer_moose/helpers/convert.dart';
 // helpers
 import 'package:timer_moose/helpers/my_time.dart';
 
@@ -16,7 +17,7 @@ class TabataTimer extends StatefulWidget {
   _TabataTimerState createState() => _TabataTimerState();
 }
 
-enum TabataStates { REST, WORK, DONE }
+enum TabataStates { REST, WORK, DONE, READY }
 
 TabataState getState(TabataStates actualState) {
   switch (actualState) {
@@ -24,6 +25,8 @@ TabataState getState(TabataStates actualState) {
       return TabataState("WORK", Colors.green);
     case TabataStates.REST:
       return TabataState("REST", Colors.red);
+    case TabataStates.READY:
+      return TabataState("WORK", createMaterialColor(Colors.white));
     default:
       return TabataState("DONE", Colors.yellow);
   }
@@ -37,23 +40,24 @@ class TabataState {
 }
 
 class _TabataTimerState extends State<TabataTimer> {
-  TabataStates myState = TabataStates.WORK;
+  TabataStates myState = TabataStates.READY;
   late int actualRound = 1;
   late String state = "WORK";
   late MaterialColor color;
   late MyTime time;
-
+  String hintText = "TAP TO PAUSE";
   late Timer _timer;
   late int totalTime = 0;
   late int missingTime = 0;
+  bool isPaused = false;
+  bool istWorking = false;
+  bool itStarted = false;
   @override
   void initState() {
     super.initState();
 
     time = widget.work.copyWith();
     restartTimer();
-
-    startTimer();
   }
 
   void restartState() {
@@ -71,14 +75,19 @@ class _TabataTimerState extends State<TabataTimer> {
   }
 
   void startTimer() {
+    istWorking = true;
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(oneSec, (timer) {
       if (missingTime == 0) {
         setState(() {
-          if (actualRound == widget.rounds && myState == TabataStates.REST) {
+          if (actualRound == widget.rounds && myState == TabataStates.WORK) {
+            actualRound++;
+            istWorking = false;
             myState = TabataStates.DONE;
           }
           switch (myState) {
+            case TabataStates.READY:
+              break;
             case TabataStates.WORK:
               myState = TabataStates.REST;
               time = widget.rest.copyWith();
@@ -125,6 +134,27 @@ class _TabataTimerState extends State<TabataTimer> {
     super.dispose();
   }
 
+  void pause() {
+    setState(() {
+      if (itStarted) {
+        if (!isPaused) {
+          isPaused = true;
+          hintText = "TAP TO PLAY";
+          _timer.cancel();
+        } else {
+          isPaused = false;
+          hintText = "TAP TO PAUSE";
+          startTimer();
+        }
+      } else {
+        itStarted = true;
+        myState = TabataStates.WORK;
+        restartState();
+        startTimer();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -156,19 +186,30 @@ class _TabataTimerState extends State<TabataTimer> {
             child: GlowText(
                 myState == TabataStates.DONE
                     ? "NICE WORK"
-                    : timeToString(this.time),
+                    : myState == TabataStates.READY
+                        ? "TAP TO START"
+                        : timeToString(this.time),
                 style: TextStyle(
-                    fontSize: myState == TabataStates.DONE ? 30 : 50,
+                    fontSize: myState == TabataStates.DONE
+                        ? 30
+                        : myState == TabataStates.READY
+                            ? 24
+                            : 50,
                     color: color,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 5.0)),
+                    letterSpacing: myState == TabataStates.READY ? 2.0 : 5.0)),
             color: Colors.white,
             key: Key("Circle Neon Tabata"),
             radius: 150,
             shadowSpread: 3,
             spreadValue: 3,
             strokeWidth: 3,
-            quantity: (pi * 2) * ((totalTime - missingTime) / totalTime),
+            quantity: myState == TabataStates.READY
+                ? pi * 2
+                : (pi * 2) * ((totalTime - missingTime) / totalTime),
+            callback: pause,
+            hintText: hintText,
+            itsWorking: istWorking,
           ),
         ],
       ),

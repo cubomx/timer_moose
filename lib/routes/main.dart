@@ -7,6 +7,7 @@ import 'package:timer_moose/routes/tabata.dart';
 import 'package:timer_moose/routes/emom.dart';
 // helpers
 import 'package:timer_moose/helpers/navigation.dart';
+import 'package:timer_moose/helpers/convert.dart';
 
 class TabataRoute extends StatelessWidget {
   @override
@@ -19,7 +20,10 @@ class TabataRoute extends StatelessWidget {
         leftArgs: [context],
         leftIcon: Icons.arrow_back_ios_new_rounded,
       ),
-      body: Tabata(),
+      body: Tabata(
+          mainColor: createMaterialColor(
+        Color(0xffe05848),
+      )),
     );
   }
 }

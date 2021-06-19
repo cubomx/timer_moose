@@ -9,14 +9,16 @@ import 'package:timer_moose/helpers/navigation.dart';
 import 'package:timer_moose/helpers/my_time.dart';
 
 class Tabata extends StatefulWidget {
+  final MaterialColor mainColor;
+  const Tabata({required this.mainColor});
   @override
   _TabataState createState() => _TabataState();
 }
 
-List<Widget> getStarting(Function buttonAction) {
+List<Widget> getStarting(Function buttonAction, MaterialColor mainColor) {
   return <Widget>[
     SquareInput(
-      colorNeon: Colors.purple,
+      colorNeon: mainColor,
       colorText: createMaterialColor(Colors.white),
       text: "ROUNDS",
       min: 1,
@@ -26,7 +28,7 @@ List<Widget> getStarting(Function buttonAction) {
       steps: 1,
     ),
     SquareInput(
-      colorNeon: Colors.purple,
+      colorNeon: mainColor,
       colorText: Colors.green,
       text: "WORK",
       min: 10,
@@ -36,7 +38,7 @@ List<Widget> getStarting(Function buttonAction) {
       steps: 5,
     ),
     SquareInput(
-      colorNeon: Colors.purple,
+      colorNeon: mainColor,
       colorText: Colors.red,
       text: "REST",
       min: 10,
@@ -48,7 +50,7 @@ List<Widget> getStarting(Function buttonAction) {
     MyButton(
         text: "START",
         fontSize: 20.0,
-        color: Colors.purple,
+        color: mainColor,
         actionButton: buttonAction,
         args: [],
         width: 200,
@@ -82,7 +84,7 @@ class _TabataState extends State<Tabata> {
   @override
   void initState() {
     super.initState();
-    items = getStarting(getWorkoutSettings);
+    items = getStarting(getWorkoutSettings, widget.mainColor);
   }
 
   @override
